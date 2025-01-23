@@ -1,0 +1,754 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+body {
+    margin: 0;
+}
+
+div {
+    font-family: "Open Sans", sans-serif;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    margin: 0;
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+    background: transparent;
+    overflow: hidden;
+}
+
+.inventory-container {
+    position: absolute;
+    left: -0px;
+    top: -0px;
+    bottom: -0px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(12, 14, 18, 0.95);
+}
+
+/* Player Inventory Styles */
+
+.player-inventory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    position: absolute;
+    top: 50vh;
+    left: 14vw;
+    width: 34vw;
+    height: 55.16vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-top: 50px;
+    transform: translateY(-50%);
+}
+
+.player-inventory-header {
+    box-sizing: border-box;
+    position: absolute;
+    top: 20vh;
+    left: 14.3vw;
+    width: 30.4vw;
+    height: fit-content;
+font-family: "Quantico";
+font-weight: 600;
+letter-spacing: 0.2vh;
+color: rgba(255, 255, 255, 1.25);
+text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Other Inventory Styles */
+
+.other-inventory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    position: absolute;
+    top: 50vh;
+    margin-top: 50px;
+    right: 14vw;
+    width: 28vw;
+    height: 55.16vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transform: translateY(-50%);
+}
+
+.other-inventory-header {
+    box-sizing: border-box;
+    position: absolute;
+    top: 20vh;
+    right: 17.4vw;
+    width: 24.4vw;
+    height: fit-content;
+    font-size: 1rem;
+    font-family: "Quantico";
+    font-style: normal;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1.25);
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Centered Styles */
+
+.centered-player-inventory {
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+.centered-inventory-header {
+    box-sizing: border-box;
+    position: absolute;
+    top: 20.3vh;
+    width: 30.4vw;
+    left: 48.3vw;
+    transform: translateX(-50%);
+    height: fit-content;
+    font-weight: bolder;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.labels-container {
+    display: flex;
+    width: 100%;
+}
+
+
+
+.inventory-label {
+    flex-grow: 1;
+    display: flex;
+    height: 30px;
+    align-items: center;
+    gap: 1.1rem; /* Space between icon and text */
+}
+
+.inventory-icon {
+    width: 30px;
+    padding: 0.2rem;
+    height: 30px;
+    box-shadow: -2px -2px 21px 7px rgba(255, 255, 255, 0.15);
+    border: medium outset  #795107;
+    border-radius: 5px;
+    color: white;
+    rotate: 150%;
+    left: 0;
+    object-fit: cover;
+    transform: rotate(45deg);
+}
+
+.inventory-icon1 {
+    width: 30px;
+    padding: 0.2rem;
+    height: 30px;
+    box-shadow: -2px -2px 21px 7px rgba(255, 255, 255, 0.15);
+    border: medium outset  #795107;
+    border-radius: 5px;
+    color: white;
+    rotate: 150%;
+    left: 0;
+    object-fit: cover;
+    transform: rotate(45deg);
+}
+
+.inventory-icon1 i, .inventory-icon i{
+    color: #795107;
+    transform: rotate(-45deg);
+    text-shadow: rgba(255, 255, 255, 0.15) 1px 0 10px;
+    font-size: 20px;
+    padding: 6px;
+}
+
+.item-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-content: flex-start;
+    width: 100%;
+}
+
+.item-slot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vh;
+    height: 10vh;
+    margin: 3px;
+    background: radial-gradient(83% 83% at 50% 50%, rgba(180, 180, 180, 0.158), rgba(120, 120, 120, .05)) !important;
+    transition: background 0.35s ease;
+    border: calc(0.092592592vh * 1.4) solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    box-shadow: 0 0 1vh rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: zoomOutAndShake 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes zoomOutAndShake {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.item-slot:hover {
+    background: #79510723 !important;
+    border: calc(0.092592592vh * 1.4) solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0.0rem 0.0rem 20px 5px #0000009f inset !important;
+}
+
+.item-slot::after {
+    content: '';
+    position: absolute;
+    top: 10;
+    left: 100%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0));
+    animation: none; /* Initially no animation */
+    opacity: 0.15;
+}
+
+.item-slot:hover::after {
+    animation: linear-shine 2s linear infinite; /* Linear shine animation on hover */
+    transform: rotate(140deg);
+}
+@keyframes linear-shine {
+    0% {
+        left: -200%;
+    }
+    25% {
+        left: -150%;
+    }
+    50% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+.item-slot-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.item-slot-img img {
+    width: 50%;
+    height: auto;
+}
+
+.item-slot-key {
+    font-weight: normal;
+    color: #ffffff;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background: rgba(138, 195, 46, 0.1);
+    border: #7951078f 0.1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    opacity: 2px;
+}
+
+.item-slot-amount {
+    font-size: 0.7vh;
+    color: white;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-price {
+    font-family: "Quantico";
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: green;
+    padding: 1px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: fit-content;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-slot-label {
+    position: absolute;
+    white-space: nowrap;
+    bottom: 0;
+    height: 1vh;
+    width: 100%;
+    background: #cccccc00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-slot-durability {
+    position: absolute;
+    bottom: 0vh;
+    width: 100%;
+    height: 3px;
+    border-radius: 100px;
+    background: rgb(121, 81, 7);
+}
+
+.item-slot-durability-fill {
+    height: 100%;
+    transition: width 0.2s;
+    border-radius: 100px;
+}
+
+.item-slot-durability-fill.high {
+    background: rgb(121, 81, 7);
+}
+
+.item-slot-durability-fill.medium {
+    background: #ffe32b50;
+}
+
+.item-slot-durability-fill.low {
+    background: red;
+}
+
+.item-slot-label > p {
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #00000000;
+    font-size: 0.7vh;
+    text-align: center;
+}
+
+/* Weight Bar Styles */
+
+
+
+.current-weight > p {
+    text-align: right;
+    padding-right: 5px;
+    font-family: "Quantico";
+    margin-top: 1.8rem;
+    font-weight: 900;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.weight-bar {
+    width: 99%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 100px;
+}
+
+.weight-bar-fill {
+    height: 8px;
+    border-radius: 100% !important;
+    transition: width 0.2s;
+}
+
+.weight-bar-fill.low {
+    border-radius: 100px !important;
+    background: #7951078f;
+}
+
+.weight-bar-fill.medium {
+    border-radius: 100px !important;
+    background: #795107;
+}
+
+.weight-bar-fill.high {
+    border-radius: 100px !important;
+    background: radial-gradient(117.32% 117.32% at 50% -13.97%, rgba(248, 105, 105, 0.55) 0%, rgba(248, 105, 105, 0.43) 100%);
+}
+
+/* Hotbar */
+
+.hotbar-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: -100px; /* Start position below the viewport */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30.1%; /* Ensure it spans the full width for proper centering */
+    pointer-events: none; /* So it does not block interaction with content underneath */
+    animation: slide-in 0.7s forwards; /* Slide in animation on load */
+}
+
+.hotbar {
+    display: flex;
+    width: fit-content;
+    pointer-events: auto; /* Ensure the hotbar itself is interactive */
+
+}
+
+
+/* JavaScript can add this class to trigger the slide-out animation */
+.hotbar-container.slide-out {
+    animation: slide-out 0.5s forwards; /* Slide out animation */
+}
+
+
+.notification-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 2%;
+    right: 1%;
+    transform: translate(-50%);
+    padding: 1px;
+    animation: zoomOutAndShake 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.notification-slot {
+    position: relative;
+    width: 10vh;
+    height: 10vh;
+    border-width: 0.15rem;
+    transition: background 0.35s ease;
+    border: #7951078f 0.1px solid;
+    display: flex;
+    background: radial-gradient(97.41% 100% at 50% 100%, rgba(12, 14, 18, 0.95) 20%, rgba(26, 26, 29, 0) 180%);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    animation: zoomOutAndShake 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+
+.notification-title {
+    color: #7951078f;
+    align-self: flex-start;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.notification-title p {
+    margin: 0;
+    padding: 1;
+font-family: "Quantico";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.0rem;
+}
+
+@keyframes slide-in {
+    0% {
+        bottom: -200px; /* Start position below the viewport */
+    }
+    100% {
+        bottom: 0; /* Final position at the bottom of the viewport */
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        bottom: 0; /* Start position at the bottom of the viewport */
+    }
+    100% {
+        bottom: -100px; /* End position below the viewport */
+    }
+}
+
+.required-item-container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 2vh;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.required-item {
+    display: flex;
+    justify-content: center;
+    width: 25vw;
+    padding: 0 10px;
+}
+
+.required-item .item-slot {
+    margin-left: 10px;
+}
+
+.context-menu {
+    position: absolute;
+    font-size: 0.8rem;
+    font-family: "Quantico";
+    font-style: normal;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    border-radius: 4px;
+    background: #2c2c2c;
+    border-top: 3px solid rgba(121, 81, 7, 0.302);
+    border-radius: calc(0.092592592vh * 0);
+    width: fit-content;
+    cursor: pointer;
+    color: #ffffff;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 8%), 0 2px 2px rgb(0 0 0 / 3%), 0 4px 4px rgb(0 0 0 / 4%), 0 10px 8px rgb(0 0 0 / 5%), 0 15px 15px rgb(0 0 0 / 6%), 0 30px 30px rgb(0 0 0 / 7%), 0 70px 65px rgb(0 0 0 / 9%);
+}
+
+.context-menu li {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+}
+
+.context-menu li:hover {
+    background: radial-gradient(rgba(121, 81, 7, 0.55) 0%, rgba(121, 81, 7, 0.22) 100%);
+    border-radius: calc(0.092592592vh * 0);
+}
+
+.submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    font-size: 0.7rem;
+    font-family: "Quantico";
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    background: #2c2c2c;
+    border-top: 3px solid rgba(121, 81, 7, 0.301);
+    border-radius: 4px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 8%), 0 2px 2px rgb(0 0 0 / 3%), 0 4px 4px rgb(0 0 0 / 4%), 0 10px 8px rgb(0 0 0 / 5%), 0 15px 15px rgb(0 0 0 / 6%), 0 30px 30px rgb(0 0 0 / 7%), 0 70px 65px rgb(0 0 0 / 9%);
+    
+}
+
+.context-menu li:hover .submenu {
+    display: block;
+}
+
+.submenu li {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.submenu li:hover {
+    background: radial-gradient(rgba(121, 81, 7, 0.55) 0%, rgba(121, 81, 7, 0.22) 100%);
+    border-radius: calc(0.092592592vh * 0);
+}
+
+/* Input Container */
+
+.input-container {
+    position: absolute;
+    width: 6%;
+    height: 1%;
+    top: 29.2%;
+    left: 51.45%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.089) 0%, rgba(77, 79, 87, 0.177) 100%);
+    border-style: solid;
+    border-width: 0.11rem;
+    border-color: rgba(110, 110, 119, 0.925);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.input-container input {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 1.2vh;
+    width: 85%;
+    outline: none;
+    text-align: center;
+    flex: 1;
+}
+
+.clear-button {
+    margin-left: 5px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background: radial-gradient(117.32% 117.32% at 50% -13.97%, rgba(248, 105, 105, 0.55) 0%, rgba(248, 105, 105, 0.43) 100%);
+    border-radius: calc(0.092592592vh * 0);
+    border: calc(0.092592592vh * 1.4) solid rgba(255, 255, 255, 0.15);
+    border: none;
+}
+
+.clear-button .fas {
+    color: white;
+}
+
+.custom-tooltip {
+    max-width: 16vw;
+    
+}
+
+.custom-tooltip .tooltip-header {
+    font-weight: bold;
+    margin-bottom: 13px;
+    padding: 12px;
+    background: radial-gradient(83% 83% at 50% 50%, rgba(180, 180, 180, 0.158), rgba(120, 120, 120, .05)) !important;
+    transition: background 0.35s ease;
+    border: calc(0.092592592vh * 1.4) solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    
+}
+
+.custom-tooltip .tooltip-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+    background: #79510723 !important;
+    border: calc(0.092592592vh * 1.4) solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0.0rem 0.0rem 20px 5px #0000009f inset !important;
+}
+
+.custom-tooltip .tooltip-description {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    
+}
+
+.custom-tooltip .tooltip-info {
+    font-size: 0.9em;
+    margin:12px 0;
+    margin-bottom: 10px;
+    background: radial-gradient(83% 83% at 50% 50%, rgba(180, 180, 180, 0.158), rgba(120, 120, 120, .05)) !important;
+    transition: background 0.35s ease;
+    border: calc(0.092592592vh * 1.4) solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.custom-tooltip .tooltip-info-key {
+    font-weight: bold;
+    
+}
+
+.custom-tooltip .tooltip-weight {
+    font-size: 0.8em;
+    text-align: center;
+    background: #79510723 !important;
+    border: calc(0.092592592vh * 1.4) solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0.0rem 0.0rem 20px 5px #0000009f inset !important;
+}
+
+.weapon-attachments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12vw;
+    height: 21vh;
+    border-radius: 50%;
+    margin: 0 auto;
+    top: 50%;
+    left: 15%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.weapon {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.attachment-slot {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.attachment-slot img {
+    width: 75%;
+    height: auto;
+}
+
+.attachment-slot:nth-child(0) {
+    transform: rotate(0deg) translate(150px) rotate(0deg);
+}
+
+.attachment-slot:nth-child(1) {
+    transform: rotate(0deg) translate(150px) rotate(0deg);
+}
+
+.attachment-slot:nth-child(2) {
+    transform: rotate(60deg) translate(150px) rotate(-60deg);
+}
+
+.attachment-slot:nth-child(3) {
+    transform: rotate(120deg) translate(150px) rotate(-120deg);
+}
+
+.attachment-slot:nth-child(4) {
+    transform: rotate(180deg) translate(150px) rotate(-180deg);
+}
+
+.attachment-slot:nth-child(5) {
+    transform: rotate(240deg) translate(150px) rotate(-240deg);
+}
+
+.attachment-slot:nth-child(6) {
+    transform: rotate(300deg) translate(150px) rotate(-300deg);
+}
+
+.attachment-slot:nth-child(7) {
+    transform: rotate(0deg) translate(150px) rotate(0deg);
+}
